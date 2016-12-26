@@ -1,0 +1,82 @@
+<div class="container">
+
+    <h1>Registration Form</h1>
+
+    <form name='regForm' novalidate>
+
+        <div class="form-group"
+             ng-class="{
+            'has-error': regForm.firstname.$error.required && regForm.firstname.$touched,
+            'has-success': regForm.firstname.$valid && regForm.firstname.$touched
+            }">
+            <label for="firstname" class="control-label">Enter your first name:</label>
+            <input type="text" id="firstname" name="firstname" class="form-control"
+
+                   ng-model="reg.user.firstname"
+                   required>
+        </div>
+
+        <div class="form-group"
+        ng-class="{
+            'has-error': regForm.secondname.$error.required && regForm.secondname.$touched,
+            'has-success': regForm.secondname.$valid && regForm.secondname.$touched
+            }">
+            <label for="secondname" class="control-label">Enter your second name:</label>
+            <input type="text" id="secondname" name="secondname" class="form-control"
+                   ng-model="reg.user.secondname"
+                   required>
+        </div>
+
+        <div class="form-group"
+             ng-class="{
+            'has-error': regForm.email.$error.required && regForm.email.$touched,
+            'has-success': regForm.email.$valid && regForm.email.$touched
+            }">
+            <label for="email" class="control-label">Enter your email:</label>
+            <input type="email" id="email" name="email" class="form-control"
+                   ng-model="reg.user.email"
+                   required>
+            <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+                Must be a valid email address: handle@domain format
+              </span>
+        </div>
+
+        <div class="form-group"
+             ng-class="{
+            'has-error': regForm.phone.$error.required && regForm.phone.$touched,
+            'has-success': regForm.phone.$valid && regForm.phone.$touched
+            }">
+            <label for="phone" class="control-label">Enter your phone number:</label>
+            <input type="text" id="phone" name="phone" class="form-control"
+                   ng-model="reg.user.phone"
+                   pattern="(\d{3})-(\d{3})-(\d{4})"
+                   required>
+            <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+                Phone must be in the format ###-###-####
+              </span>
+        </div>
+
+        <div class="form-group"
+             ng-class="{
+            'has-error': regForm.favdish.$invalid && regForm.favdish.$touched,
+            'has-success': regForm.favdish.$valid && regForm.favdish.$touched
+            }">
+            <label for="favdish" class="control-label">Enter your favorite dish:</label>
+            <input type="text" id="favdish" name="favdish" class="form-control" ng-change="reg.checkValidity()"
+                   ng-model="reg.user.favdish"
+                   required>
+            <span ng-if="regForm.favdish.$invalid && regForm.favdish.$touched">
+                There is no such dish
+              </span>
+        </div>
+
+        <div class="form-group" ng-show="reg.registered">
+            <span>Successfully registered!</span>
+        </div>
+
+        <button class="btn btn-default"
+                ng-disabled="regForm.$invalid || dishinvalid"
+                ng-click="reg.submit()">Submit</button>
+    </form>
+
+</div>
